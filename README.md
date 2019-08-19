@@ -43,8 +43,74 @@ To deactivate the virtual environment (obviously while it is active) run:
 deactivate
 ```
 
+- Useful Python virtual environment cheatsheet: https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/
+
 ---
 
-## API
+## Dependencies
+
+The required Python packages are located in the `requirements.txt` file as a best practice. This file will include specific packages and versions (pinning them down to specific versions is intended).
+
+For more information about the packages, go to https://pypi.org/.
+
+
+
+---
+
+## Django
+
+**1. Create a new Django project:**
+
+**While in a git bash command line inside the vagrant machine terminal, and while it is active**, run:
+
+```commandline
+django-admin.py startproject profiles_project .
+```
+
+What this does is that it will run the `django-admin.py` script that will start a new project by running `startproject` and set a name of `profiles_project` in the specified location `.` (root folder). If a location is not specified, it will create a new sub-folder.
+
+**2. Create a new Django app (within our project):**
+
+A Django project can consist of one or more sub applications within a project that can consist of different functionalities within a project.
+
+To create a sub-application within a project, run (*inside the vagrant machine terminal sync folder, and while it is active*):
+
+```commandline
+python manage.py startapp profiles_api
+```
+
+Where `startapp` will create a new app, and `profiles_api` is used to set the name (and will appear as a new sub-folder).
+
+**3. Enable an app within our project**:
+
+To install/add new apps to the project, open the `settings.py` file inside the project folder, and add the app's name to the `INSTALLED_APPS` list.
+
+For example:
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',  # Django REST framework.
+    'rest_framework.authtoken',  # Allows usage of authentication tokens out of the box with the REST framework.
+    'profiles_api', # Our Django created app.
+]
+```
+
+**4. Running the Django development server**:
+
+While connected to the vagrant box, working on an environment (`(env)`), run:
+
+```commandline
+python manage.py runserver 0.0.0.0:8000
+```
+
+This command will start development server available on all network adapters in port 8000 (as set in the `VagrantFile`).
+
+To stop the server, type `CTRL+C`.
 
 `WIP`
