@@ -6,6 +6,16 @@ Django REST API concepts.
 
 ## Vagrant
 
+### Initialization
+
+To initialize vagrant, run:
+
+```commandline
+vagrant init ubuntu/bionic64
+```
+
+Where `ubuntu/bionic64` is the type (OS) of the created server, there are more options available in the vagrant website.
+
 ### Basics
 
 - The box type is `ubunty/bionic64`.
