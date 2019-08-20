@@ -45,7 +45,7 @@ An active virtual environment is needed so that all of the installed dependencie
 source ~/env/bin/activate
 ```
 
-You will know that you're working on a virtual environment because the name of the virtual environment that is being worked on will appear in brackets as a prefix to the command line input, such as `(env) vagrant@ubuntu-bionic:/vagrant$`.
+So long as python virtual environment was installed in `~/env`, this command line will run correctly. You will know that you're working on a virtual environment because the name of the virtual environment that is being worked on will appear in brackets as a prefix to the command line input, such as `(env) vagrant@ubuntu-bionic:/vagrant$`.
 
 To deactivate the virtual environment (obviously while it is active) run:
 
@@ -63,7 +63,11 @@ The required Python packages are located in the `requirements.txt` file as a bes
 
 For more information about the packages, go to https://pypi.org/.
 
+To install the required dependencies, run inside the virtual machine (while activated):
 
+```commandline
+pip install requirements.txt
+```
 
 ---
 
