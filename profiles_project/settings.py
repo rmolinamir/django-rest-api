@@ -22,7 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^$u-wd^06l+x%jx8#up1e%x%@9!hl7s3o))fm#o1w6(%=gg3+i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG is an env variable of 0 in production, which means that this will fallback to 0 then False in production.
+# DEBUG does not exists as an env variable in development, it will fallback to 1 then True in development.
+# Check deploy/supervisor_profiles_api.conf for more details.
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = []
 
@@ -119,3 +122,6 @@ STATIC_URL = '/static/'
 # Custom user model for all authentication in our project
 
 AUTH_USER_MODEL = 'profiles_api.UserProfile'
+
+# Location where Django will store all of the necessary static files to run the browsable API.
+STATIC_ROOT = 'static/'

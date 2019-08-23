@@ -144,4 +144,19 @@ For example, the `perform_create()` function in a `ModelViewSet` is the entry po
 
 ---
 
+## Deployment to AWS
+
+- *Optional pre-requirement*: Add a SSH Key Pair to AWS to use SSH authentication (optional but recommended - **the SSH Key Pair is for the user and not the actual Django server**).
+
+To do this, go to the AWS website, click on the *Services* tab, go to the *EC2* section, then go to the *Network & Security* sub-section, then click on *Key Pairs*, and finally follow the instructions to add the SSH Key Pair (it's recommended to give it a name that matches the laptop or computer being used).
+
+#### Deployment Process:
+
+1. Create and launch an EC2 instance.
+    - It is important to choose an appropriate Amazon Machine Image (AMI).
+    - Configure the instance details, and allow HTTP access inside the "Configure Security Group" section by adding a new rule.
+2. Create deploy scripts, take a look at the `deploy` folder in the root directory.
+3. Configure the `settings.py` file, particularly the `DEBUG`, `STATIC_URL`, and `STATIC_ROOT` variables.
+4. Make the deploy scripts executable in the AMI by running `chmod +x deploy/*.sh`
+
 `WIP`
