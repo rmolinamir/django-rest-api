@@ -4,11 +4,14 @@ from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter
 from rest_framework import status
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.serializers import api_settings
 
 # Local
 from profiles_api import models
 from profiles_api import permissions
 from profiles_api.serializers import HelloSerializer, UserProfileSerializer
+
 
 class HelloApiView(APIView):
     """Test API View"""
@@ -104,3 +107,10 @@ class UserProfileViewSet(ModelViewSet):
     permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (SearchFilter,)
     search_fields = ('name', 'email',)
+
+
+class UserLoginApiView(ObtainAuthToken):
+    """Handle creating user authentication tokens"""
+    # ObtainAuthToken does not have renderer_classes so we need to add it manually
+    # renderer_classes will allows testing this Login API in the Django Admin web app
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
