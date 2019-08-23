@@ -27,7 +27,10 @@ SECRET_KEY = '^$u-wd^06l+x%jx8#up1e%x%@9!hl7s3o))fm#o1w6(%=gg3+i'
 # Check deploy/supervisor_profiles_api.conf for more details.
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ec2-54-242-255-112.compute-1.amazonaws.com',
+    '127.0.0.1',
+]
 
 # Application definition
 

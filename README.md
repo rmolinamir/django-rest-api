@@ -158,5 +158,14 @@ To do this, go to the AWS website, click on the *Services* tab, go to the *EC2* 
 2. Create deploy scripts, take a look at the `deploy` folder in the root directory.
 3. Configure the `settings.py` file, particularly the `DEBUG`, `STATIC_URL`, and `STATIC_ROOT` variables.
 4. Make the deploy scripts executable in the AMI by running `chmod +x deploy/*.sh`
-
-`WIP`
+5. Connect to the launched EC2 instance.
+    - 5.1. Copy the Public DNS (IPV4) address in the dashboard, then connect to it in a bash terminal in the root directory of the project by running:
+    ```commandline
+    ssh ubuntu@ec2-54-242-255-112.compute-1.amazonaws.com
+    ```
+   Note: you might be prompted for security SSH authentication, follow the instructions. If you get stuck, start by giving [this thread a read](https://superuser.com/questions/988185/how-to-avoid-being-asked-enter-passphrase-for-key-when-im-doing-ssh-operatio).
+   - 5.2. Download and run the script that was created to connect to the server (`deploy/setup.sh`. To do this, pull the script from GitHub into the server, then run the script to setup the server for deployment **(replace the URL in the command with the one you will be using)**. To do this, run in the following command line in a bash terminal inside the root directory (while connected to the previous AMI's ubuntu machine):
+   ```commandline
+   curl -sL https://raw.githubusercontent.com/rmolinamir/django-rest-api/master/deploy/setup.sh | sudo bash -
+   ```
+6. Update the `ALLOWED_HOSTS` list inside `settings.py` to be able to remotely access the Django Admin Browsable API. Add the Public DNS (IPV4) address and the localhost (`'127.0.0.1'`).
