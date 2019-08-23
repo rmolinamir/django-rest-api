@@ -127,4 +127,21 @@ This command will start development server available on all network adapters in 
 
 To stop the server, type `CTRL+C`.
 
+
+--- 
+
+## Django Components
+
+From the components *closest* to the **database tables**, to the components that are *closest* to the **HTTP requests that receive JSON data**:
+
+- **Models**: These describe how we want the structure of our data so that Django can translate Python objects to tables in a database.
+
+- **Serializers**: These translate the data from the HTTP request into a Python object.
+
+- **Views**: These receive the HTTP requests, passes it to a **Serializer** to translate the data from the HTTP request into a Python object, that can then in turn be passed to the **model**, and translated to a row in the database.
+
+For example, the `perform_create()` function in a `ModelViewSet` is the entry point in our hypothetical application. So when we want to create a new user, we make a HTTP POST request which gets received by `perform_create()`, which passes it through the Serializer to convert the raw JSON to a Python object and then passes it to the model to save it in the database.
+
+---
+
 `WIP`

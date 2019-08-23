@@ -6,11 +6,12 @@ from rest_framework.filters import SearchFilter
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.serializers import api_settings
+from rest_framework.permissions import IsAuthenticatedOrReadOnly  # IsAuthenticated for 100% registered users
 
 # Local
 from profiles_api import models
 from profiles_api import permissions
-from profiles_api.serializers import HelloSerializer, UserProfileSerializer
+from profiles_api.serializers import HelloSerializer, UserProfileSerializer, ProfileFeedItemSerializer
 
 
 class HelloApiView(APIView):
@@ -114,3 +115,18 @@ class UserLoginApiView(ObtainAuthToken):
     # ObtainAuthToken does not have renderer_classes so we need to add it manually
     # renderer_classes will allows testing this Login API in the Django Admin web app
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class UserProfileFeedViewSet(ModelViewSet):
+    """ Handle creating, reading, and updating profile feed items"""
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (
+        permissions.UpdateOwnStatus,
+        IsAuthenticatedOrReadOnly,
+    )
+    serializer_class = ProfileFeedItemSerializer
+    queryset = models.ProfileFeedItem.objects.all()
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+        serializer.save(user_profile=self.request.user)
