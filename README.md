@@ -169,3 +169,20 @@ To do this, go to the AWS website, click on the *Services* tab, go to the *EC2* 
    curl -sL https://raw.githubusercontent.com/rmolinamir/django-rest-api/master/deploy/setup.sh | sudo bash -
    ```
 6. Update the `ALLOWED_HOSTS` list inside `settings.py` to be able to remotely access the Django Admin Browsable API. Add the Public DNS (IPV4) address and the localhost (`'127.0.0.1'`).
+7. Run the update script on the server, by running the `deploy/update.sh` script (You have to move into the project's root directory, you can do this by running `cd ../../usr/local/apps/profiles-rest-api` in Windows 10). **Always do this to implement any change.**
+
+Hosted routes:
+
+- API: http://ec2-54-242-255-112.compute-1.amazonaws.com/api/
+- Admin Panel: http://ec2-54-242-255-112.compute-1.amazonaws.com/admin/
+
+Creating a superuser is similar as in the local development server. To do this, run in the AMI project's root directory:
+
+```commanline
+    sudo env/bin/python manage.py createsuperuser
+```
+
+- Superuser account to showcase the results:
+
+    - *Email:* dummiesuperuser@test.com
+    - *Password:* dummiesuperuser@test.com
