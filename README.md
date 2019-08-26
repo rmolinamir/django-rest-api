@@ -66,7 +66,7 @@ For more information about the packages, go to https://pypi.org/.
 To install the required dependencies, run inside the virtual machine (while activated):
 
 ```commandline
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
